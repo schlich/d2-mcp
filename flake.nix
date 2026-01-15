@@ -74,15 +74,6 @@
             program = "${self.packages.${system}.default}/bin/d2-mcp";
           };
 
-          # Run with SSE transport on default port 8080
-          # Override with: nix run .#sse -- --port 9000
-          sse = {
-            type = "app";
-            program = "${pkgs.writeShellScript "d2-mcp-sse" ''
-              ${self.packages.${system}.default}/bin/d2-mcp --transport sse --port 8080 "$@"
-            ''}";
-          };
-
           # Run with HTTP transport on default port 8080
           # Override with: nix run .#http -- --port 9000
           http = {
