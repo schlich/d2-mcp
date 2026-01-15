@@ -150,17 +150,34 @@ The flake provides three apps:
 1. **default**: Standard stdio mode
    ```bash
    nix run github:h0rv/d2-mcp
+   
+   # With additional arguments
+   nix run github:h0rv/d2-mcp -- --image-type svg
    ```
 
-2. **sse**: SSE transport on port 8080
+2. **sse**: SSE transport on default port 8080
    ```bash
    nix run github:h0rv/d2-mcp#sse
+   
+   # Override port
+   nix run github:h0rv/d2-mcp#sse -- --port 9000
+   
+   # With additional arguments
+   nix run github:h0rv/d2-mcp#sse -- --port 9000 --image-type ascii
    ```
 
-3. **http**: HTTP transport on port 8080
+3. **http**: HTTP transport on default port 8080
    ```bash
    nix run github:h0rv/d2-mcp#http
+   
+   # Override port
+   nix run github:h0rv/d2-mcp#http -- --port 9000
+   
+   # With additional arguments
+   nix run github:h0rv/d2-mcp#http -- --port 9000 --image-type svg
    ```
+
+**Note**: All apps support passing additional arguments after `--`. The `sse` and `http` apps use port 8080 by default but can be overridden using the `--port` flag.
 
 ## Runtime Dependencies
 
