@@ -62,6 +62,8 @@ nix develop
 
 **Note:** The first time you build, Nix will show an error with the expected `vendorHash`. Update the `vendorHash` value in `flake.nix` with the hash from the error message, then rebuild.
 
+For detailed Nix usage instructions, see [NIX.md](./NIX.md).
+
 ### Option 5: Build Image Locally
 
 ```bash
