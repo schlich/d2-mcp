@@ -1,4 +1,4 @@
-module github.com/h0rv/d2-mcp
+module github.com/schlich/d2-mcp
 
 go 1.24.2
 

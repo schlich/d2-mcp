@@ -37,7 +37,7 @@
 
             meta = with pkgs.lib; {
               description = "Model Context Protocol server for D2 diagramming";
-              homepage = "https://github.com/h0rv/d2-mcp";
+              homepage = "https://github.com/schlich/d2-mcp";
               license = licenses.mit;
               maintainers = [ ];
               mainProgram = "d2-mcp";
