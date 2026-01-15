@@ -6,8 +6,14 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
@@ -23,9 +29,6 @@
             # This is the standard Nix workflow for Go modules with vendored dependencies.
             # To update: run `nix build`, copy the hash from the error, and update this value.
             vendorHash = pkgs.lib.fakeHash;
-
-            # Set CGO_ENABLED if needed by dependencies
-            CGO_ENABLED = 0;
 
             # Ensure ImageMagick is available at runtime
             postInstall = ''
