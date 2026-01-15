@@ -36,7 +36,33 @@ cd d2-mcp
 go build .
 ```
 
-### Option 4: Build Image Locally
+### Option 4: Install via Nix Flakes
+
+With [Nix](https://nixos.org/) installed and flakes enabled:
+
+```bash
+# Run directly without installing
+nix run github:h0rv/d2-mcp
+
+# Install to your profile
+nix profile install github:h0rv/d2-mcp
+
+# Build from local checkout
+git clone https://github.com/h0rv/d2-mcp.git
+cd d2-mcp
+nix build
+
+# Run with different transports
+nix run .#sse    # SSE transport on port 8080
+nix run .#http   # HTTP transport on port 8080
+
+# Enter development shell with Go and tools
+nix develop
+```
+
+**Note:** The first time you build, Nix will show an error with the expected `vendorHash`. Update the `vendorHash` value in `flake.nix` with the hash from the error message, then rebuild.
+
+### Option 5: Build Image Locally
 
 ```bash
 docker build . -t d2-mcp
@@ -54,7 +80,7 @@ docker run --rm SSE_MODE=true -p 8080:8080 -e d2-mcp
 docker run --rm -e SSE_MODE=true -p 8080:8080 -v $(pwd):/data d2-mcp
 ```
 
-### Option 5: Run Container Image
+### Option 6: Run Container Image
 
 ```bash
 # Run in stdio mode (default - for MCP clients)
@@ -102,6 +128,30 @@ Add the `d2` MCP server to your respective MCP Clients config:
         "d2": {
             "command": "/YOUR/ABSOLUTE/PATH/d2-mcp",
             "args": ["--image-type", "png", "--write-files"]
+        }
+    }
+}
+```
+
+**Using Nix:**
+```json
+{
+    "mcpServers": {
+        "d2": {
+            "command": "nix",
+            "args": ["run", "github:h0rv/d2-mcp", "--", "--image-type", "png"]
+        }
+    }
+}
+```
+
+**Using Nix from local checkout:**
+```json
+{
+    "mcpServers": {
+        "d2": {
+            "command": "nix",
+            "args": ["run", "/YOUR/ABSOLUTE/PATH/d2-mcp", "--", "--image-type", "svg"]
         }
     }
 }
