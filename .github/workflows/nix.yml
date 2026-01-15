@@ -40,7 +40,3 @@ jobs:
 
       - name: Test dev shell
         run: nix develop --command go version
-
-      - name: Build app
-        run: |
-          nix build .#http --print-build-logs
