@@ -15,16 +15,13 @@
         packages = {
           default = pkgs.buildGoModule {
             pname = "d2-mcp";
-            version = "1.0.0";
+            version = "1.0.0-${self.shortRev or "dev"}";
 
             src = ./.;
 
             # To update this hash, run: nix build .#default
             # The error message will show the correct hash to use
             vendorHash = pkgs.lib.fakeHash;
-
-            # Runtime dependencies for PNG rendering
-            buildInputs = [ pkgs.imagemagick ];
 
             # Set CGO_ENABLED if needed by dependencies
             CGO_ENABLED = 0;
