@@ -1,5 +1,9 @@
 # This workflow tests the Nix flake configuration for d2-mcp.
 # It validates flake structure, builds the package, and tests the resulting binary.
+#
+# NOTE: This workflow will fail if flake.nix contains `vendorHash = pkgs.lib.fakeHash`.
+# To fix: run `nix build` locally, copy the correct hash from the error message,
+# and update the vendorHash in flake.nix. See NIX.md for details.
 
 name: Nix
 
