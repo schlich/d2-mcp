@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	d2 "github.com/h0rv/d2-mcp/d2"
+	d2 "github.com/schlich/d2-mcp/d2"
 
 	"github.com/mark3labs/mcp-go/mcp"
 )

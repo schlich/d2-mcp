@@ -6,8 +6,14 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
@@ -22,10 +28,7 @@
             # Placeholder hash that will show the actual hash on first build attempt.
             # This is the standard Nix workflow for Go modules with vendored dependencies.
             # To update: run `nix build`, copy the hash from the error, and update this value.
-            vendorHash = pkgs.lib.fakeHash;
-
-            # Set CGO_ENABLED if needed by dependencies
-            CGO_ENABLED = 0;
+            vendorHash = "sha256-sl/Xa1bwYwyGLvOb/Dow2QA2KYwCZrxsn5EP6xUmdQ8=";
 
             # Ensure ImageMagick is available at runtime
             postInstall = ''
@@ -37,7 +40,7 @@
 
             meta = with pkgs.lib; {
               description = "Model Context Protocol server for D2 diagramming";
-              homepage = "https://github.com/h0rv/d2-mcp";
+              homepage = "https://github.com/schlich/d2-mcp";
               license = licenses.mit;
               maintainers = [ ];
               mainProgram = "d2-mcp";
@@ -69,15 +72,6 @@
           default = {
             type = "app";
             program = "${self.packages.${system}.default}/bin/d2-mcp";
-          };
-
-          # Run with SSE transport on default port 8080
-          # Override with: nix run .#sse -- --port 9000
-          sse = {
-            type = "app";
-            program = "${pkgs.writeShellScript "d2-mcp-sse" ''
-              ${self.packages.${system}.default}/bin/d2-mcp --transport sse --port 8080 "$@"
-            ''}";
           };
 
           # Run with HTTP transport on default port 8080

@@ -13,23 +13,23 @@ This document provides detailed instructions for using d2-mcp with Nix flakes.
 
 ```bash
 # Run the server in stdio mode (default)
-nix run github:h0rv/d2-mcp
+nix run github:schlich/d2-mcp
 
 # Run with specific image type
-nix run github:h0rv/d2-mcp -- --image-type svg
+nix run github:schlich/d2-mcp -- --image-type svg
 
 # Run with SSE transport
-nix run github:h0rv/d2-mcp#sse
+nix run github:schlich/d2-mcp#sse
 
 # Run with HTTP transport
-nix run github:h0rv/d2-mcp#http
+nix run github:schlich/d2-mcp#http
 ```
 
 ### Installing
 
 ```bash
 # Install to your user profile
-nix profile install github:h0rv/d2-mcp
+nix profile install github:schlich/d2-mcp
 
 # Now you can run it directly
 d2-mcp --help
@@ -40,7 +40,7 @@ d2-mcp --help
 ### Clone and build
 
 ```bash
-git clone https://github.com/h0rv/d2-mcp.git
+git clone https://github.com/schlich/d2-mcp.git
 cd d2-mcp
 
 # Build the package
@@ -103,7 +103,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
     "mcpServers": {
         "d2": {
             "command": "nix",
-            "args": ["run", "github:h0rv/d2-mcp", "--", "--image-type", "png"]
+            "args": ["run", "github:schlich/d2-mcp", "--", "--image-type", "png"]
         }
     }
 }
@@ -126,7 +126,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ```bash
 # First install to profile
-nix profile install github:h0rv/d2-mcp
+nix profile install github:schlich/d2-mcp
 
 # Then find the path
 which d2-mcp
@@ -149,32 +149,32 @@ The flake provides three apps:
 
 1. **default**: Standard stdio mode
    ```bash
-   nix run github:h0rv/d2-mcp
+   nix run github:schlich/d2-mcp
    
    # With additional arguments
-   nix run github:h0rv/d2-mcp -- --image-type svg
+   nix run github:schlich/d2-mcp -- --image-type svg
    ```
 
 2. **sse**: SSE transport on default port 8080
    ```bash
-   nix run github:h0rv/d2-mcp#sse
+   nix run github:schlich/d2-mcp#sse
    
    # Override port
-   nix run github:h0rv/d2-mcp#sse -- --port 9000
+   nix run github:schlich/d2-mcp#sse -- --port 9000
    
    # With additional arguments
-   nix run github:h0rv/d2-mcp#sse -- --port 9000 --image-type ascii
+   nix run github:schlich/d2-mcp#sse -- --port 9000 --image-type ascii
    ```
 
 3. **http**: HTTP transport on default port 8080
    ```bash
-   nix run github:h0rv/d2-mcp#http
+   nix run github:schlich/d2-mcp#http
    
    # Override port
-   nix run github:h0rv/d2-mcp#http -- --port 9000
+   nix run github:schlich/d2-mcp#http -- --port 9000
    
    # With additional arguments
-   nix run github:h0rv/d2-mcp#http -- --port 9000 --image-type svg
+   nix run github:schlich/d2-mcp#http -- --port 9000 --image-type svg
    ```
 
 **Note**: All apps support passing additional arguments after `--`. The `sse` and `http` apps use port 8080 by default but can be overridden using the `--port` flag.
@@ -208,7 +208,7 @@ The Nix package should handle this automatically, but if you see errors:
 
 ```bash
 # Verify ImageMagick is available
-nix run github:h0rv/d2-mcp -- --help
+nix run github:schlich/d2-mcp -- --help
 magick --version  # Should work
 ```
 
@@ -218,7 +218,7 @@ If you get "unrecognized flag: --experimental-features", enable flakes:
 
 ```bash
 # Temporary (for one command)
-nix --experimental-features 'nix-command flakes' run github:h0rv/d2-mcp
+nix --experimental-features 'nix-command flakes' run github:schlich/d2-mcp
 
 # Permanent (add to ~/.config/nix/nix.conf)
 experimental-features = nix-command flakes
@@ -244,7 +244,7 @@ nix profile upgrade d2-mcp
 
 # Or reinstall
 nix profile remove d2-mcp
-nix profile install github:h0rv/d2-mcp
+nix profile install github:schlich/d2-mcp
 ```
 
 ## Integration with NixOS

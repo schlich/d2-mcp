@@ -25,13 +25,13 @@ A Model Context Protocol (MCP) server for working with [D2: Declarative Diagramm
 ### Option 2: Install via `go`
 
 ```bash
-go install github.com/h0rv/d2-mcp@latest
+go install github.com/schlich/d2-mcp@latest
 ```
 
 ### Option 3: Build Locally
 
 ```bash
-git clone https://github.com/h0rv/d2-mcp.git
+git clone https://github.com/schlich/d2-mcp.git
 cd d2-mcp
 go build .
 ```
@@ -42,13 +42,13 @@ With [Nix](https://nixos.org/) installed and flakes enabled:
 
 ```bash
 # Run directly without installing
-nix run github:h0rv/d2-mcp
+nix run github:schlich/d2-mcp
 
 # Install to your profile
-nix profile install github:h0rv/d2-mcp
+nix profile install github:schlich/d2-mcp
 
 # Build from local checkout
-git clone https://github.com/h0rv/d2-mcp.git
+git clone https://github.com/schlich/d2-mcp.git
 cd d2-mcp
 nix build
 
@@ -86,16 +86,16 @@ docker run --rm -e SSE_MODE=true -p 8080:8080 -v $(pwd):/data d2-mcp
 
 ```bash
 # Run in stdio mode (default - for MCP clients)
-docker run --rm -i ghcr.io/h0rv/d2-mcp:main
+docker run --rm -i ghcr.io/schlich/d2-mcp:main
 
 # Run in stdio mode with filesystem access
-docker run --rm -i -v $(pwd):/data ghcr.io/h0rv/d2-mcp:main
+docker run --rm -i -v $(pwd):/data ghcr.io/schlich/d2-mcp:main
 
 # Run in SSE mode (HTTP server)
-docker run --rm -e SSE_MODE=true -p 8080:8080 ghcr.io/h0rv/d2-mcp:main
+docker run --rm -e SSE_MODE=true -p 8080:8080 ghcr.io/schlich/d2-mcp:main
 
 # Run in SSE mode with filesystem access
-docker run --rm -e SSE_MODE=true -p 8080:8080 -v $(pwd):/data ghcr.io/h0rv/d2-mcp:main
+docker run --rm -e SSE_MODE=true -p 8080:8080 -v $(pwd):/data ghcr.io/schlich/d2-mcp:main
 ```
 
 ## Setup with MCP Client
@@ -141,7 +141,7 @@ Add the `d2` MCP server to your respective MCP Clients config:
     "mcpServers": {
         "d2": {
             "command": "nix",
-            "args": ["run", "github:h0rv/d2-mcp", "--", "--image-type", "png"]
+            "args": ["run", "github:schlich/d2-mcp", "--", "--image-type", "png"]
         }
     }
 }
@@ -165,7 +165,7 @@ Add the `d2` MCP server to your respective MCP Clients config:
     "mcpServers": {
         "d2": {
             "command": "docker",
-            "args": ["run", "--rm", "-i", "ghcr.io/h0rv/d2-mcp:main", "--image-type", "svg"]
+            "args": ["run", "--rm", "-i", "ghcr.io/schlich/d2-mcp:main", "--image-type", "svg"]
         }
     }
 }
@@ -180,7 +180,7 @@ Add the `d2` MCP server to your respective MCP Clients config:
             "args": [
                 "run", "--rm", "-i",
                 "-v", "./:/data",
-                "ghcr.io/h0rv/d2-mcp:main",
+                "ghcr.io/schlich/d2-mcp:main",
                 "--image-type", "ascii",
                 "--ascii-mode", "standard",
                 "--write-files"
@@ -207,13 +207,13 @@ Inside MCP tool calls, pass the optional `format` argument (`png`, `svg`, `ascii
 Run the container with default PNG output over stdio:
 
 ```bash
-docker run --rm -i ghcr.io/h0rv/d2-mcp:main
+docker run --rm -i ghcr.io/schlich/d2-mcp:main
 ```
 
 Switch to Unicode ASCII diagrams and capture responses as plain text:
 
 ```bash
-docker run --rm -i ghcr.io/h0rv/d2-mcp:main --image-type ascii
+docker run --rm -i ghcr.io/schlich/d2-mcp:main --image-type ascii
 ```
 
 Use basic ASCII characters and write rendered files back into your working tree (requires a bind mount):
@@ -221,7 +221,7 @@ Use basic ASCII characters and write rendered files back into your working tree 
 ```bash
 docker run --rm -i \
   -v "$(pwd)":/data \
-  ghcr.io/h0rv/d2-mcp:main \
+  ghcr.io/schlich/d2-mcp:main \
   --image-type ascii \
   --ascii-mode standard \
   --write-files
@@ -230,13 +230,13 @@ docker run --rm -i \
 Expose the SSE server on port 8080 while emitting SVG:
 
 ```bash
-docker run --rm -e SSE_MODE=true -p 8080:8080 ghcr.io/h0rv/d2-mcp:main --image-type svg
+docker run --rm -e SSE_MODE=true -p 8080:8080 ghcr.io/schlich/d2-mcp:main --image-type svg
 ```
 
 Expose the streamable HTTP transport (default endpoint `/mcp`) for use with MCP clients that expect the new protocol:
 
 ```bash
-docker run --rm -p 8080:8080 ghcr.io/h0rv/d2-mcp:main --transport http --image-type svg
+docker run --rm -p 8080:8080 ghcr.io/schlich/d2-mcp:main --transport http --image-type svg
 ```
 
 ### Cheat Sheet Tool
