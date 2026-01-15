@@ -28,7 +28,7 @@
             # Placeholder hash that will show the actual hash on first build attempt.
             # This is the standard Nix workflow for Go modules with vendored dependencies.
             # To update: run `nix build`, copy the hash from the error, and update this value.
-            vendorHash = pkgs.lib.fakeHash;
+            vendorHash = "sha256-sl/Xa1bwYwyGLvOb/Dow2QA2KYwCZrxsn5EP6xUmdQ8=";
 
             # Ensure ImageMagick is available at runtime
             postInstall = ''
